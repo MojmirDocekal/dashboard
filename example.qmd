@@ -1,0 +1,17 @@
+# Section
+
+- some notes
+- one, *two*, **three**
+
+```{r}
+truth_table <- function(x) {
+  vars <- unique(unlist(strsplit(x, "[^a-zA-Z]+")))
+  vars <- vars[vars != ""]
+  perm <- expand.grid(rep(list(c(FALSE, TRUE)), length(vars)))
+  names(perm) <- vars
+  perm[ , x] <- with(perm, eval(parse(text = x)))
+  perm
+}
+
+truth_table("!(P | Q)")
+```
